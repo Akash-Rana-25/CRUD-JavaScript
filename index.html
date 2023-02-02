@@ -16,21 +16,20 @@
 
 <body>
     <div class="container shadow-lg p-3 mb-5 bg-body rounded mt-5">
-
-
         <div class="row">
             <div class="col">
                 <div class="btn-group  " role="group" aria-label="Basic example">
-                    <button type="button" onclick="idSort()" id="sort_id" class="btn btn-outline-success">Product ID</button>
-                    <button type="button" onclick="nameSort()"id="sort_name" class="btn btn-outline-success">Name</button>
-                    <button type="button" onclick="lowTohigh()"id="sort_low_to_high" class="btn btn-outline-success">Price(Low To
+                    <button type="radio" id="sort_id" class="btn btn-outline-success">Product ID</button>
+                    <button type="radio" id="sort_name" class="btn btn-outline-success">Name</button>
+                    <button type="radio" id="sort_low_to_high" class="btn btn-outline-success">Price(Low To
                         High)</button>
-                    <button type="button" onclick="highToLow()"id="sort_high_to_low" class="btn btn-outline-success">Price(High To
+                    <button type="radio" id="sort_high_to_low" class="btn btn-outline-success">Price(High To
                         Low)</button>
                 </div>
             </div>
             <div class="col">
-                <input class="form-control me-2" id="search" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2" id="search" type="search" placeholder="Search" aria-label="Search"
+                    oninput="searchProduct(this.value)">
             </div>
             <div class="col">
                 <button type="button" class="btn btn-success mt-2 mb-2 float-end add_product" data-bs-toggle="modal"
@@ -49,7 +48,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="javascript:void(0)">
+                        <form action="javascript:void(0)" id="myform"name="myform">
                             <div class="form-group">
                                 <label for="product_id">Product Id</label>
                                 <input type="text" class="form-control" id="product_id" required="" aria-describedby=""
@@ -69,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="product_img">Product image</label>
-                                <input type="file" class="form-control" id="product_img">
+                                <input type="file" class="form-control" id="product_img" required=""> 
 
                             </div>
                             <div class="form-group">
@@ -99,43 +98,44 @@
                         <form action="javascript:void(0)">
                             <div class="form-group">
                                 <label for="update_product_id">Product Id</label>
-                                <input type="text" class="form-control" id="update_product_id" required="" aria-describedby="" value=""
-                                    placeholder="Enter Product Id" >
-        
+                                <input type="text" class="form-control" id="update_product_id" required=""
+                                    aria-describedby="" value="" placeholder="Enter Product Id" disabled>
+
                             </div>
                             <div class="form-group">
                                 <label for="update_product_name">Product Name</label>
-                                <input type="text" class="form-control" id="update_product_name" required=""value=""
-                                    placeholder="Enter Name of the Product" >
+                                <input type="text" class="form-control" id="update_product_name" required="" value=""
+                                    placeholder="Enter Name of the Product">
                             </div>
                             <div class="form-group">
                                 <label for="update_product_price">Product Price</label>
-                                <input type="number" min="0" class="form-control" id="update_product_price" required="" value=""
-                                    aria-describedby="" placeholder="Enter the Price"  >
-        
+                                <input type="number" min="0" class="form-control" id="update_product_price" required=""
+                                    value="" aria-describedby="" placeholder="Enter the Price">
+
                             </div>
                             <div class="form-group">
                                 <label for="update_product_img">Product image</label>
                                 <input type="file" class="form-control" id="update_product_img">
-        
+
                             </div>
                             <div class="form-group">
                                 <label for="update_product_description">Product Description</label>
-                                <input type="text" class="form-control" id="update_product_description" required=""value=""
-                                    placeholder="Enter product description"  >
+                                <input type="text" class="form-control" id="update_product_description" required=""
+                                    value="" placeholder="Enter product description">
                             </div>
-        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input class="btn btn-primary" onclick="addData()" id="submit_btn" type="submit" >
+                        <input class="btn btn-primary" id="submit_btn2" type="submit">
                     </div>
                     </form>
-        
+
                 </div>
             </div>
         </div>
-        <div id="p1"></div>
+        <div class="card-group mt-5" id="p1">
+        </div>
         <!-- <div class="card-group mt-5">
             <div class="card shadow-sm p-3 mb-5 bg-body rounded">
                 <img src="images/books_and_music_instruments/flutes.webp" class="card-img-top" alt="...">
@@ -174,6 +174,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="crud.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>
