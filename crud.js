@@ -71,7 +71,7 @@ function addData() {
                 .then(() => {
                     dispatch(redirect('/'));
                 })
-                display();
+            display();
         } else {
             for (var i = 0; i < items.length; i++) {
                 if (items[i].id == product_id) {
@@ -86,25 +86,25 @@ function addData() {
                 }
             }
 
-                    const products = JSON.parse(localStorage.getItem("Product_Details")) ?? [];
-                    products.push(newproduct);
-                    localStorage.setItem("Product_Details", JSON.stringify(products));
-                    swal({
-                        title: 'Product Added',
-                        text: 'Redirecting...',
-                        icon: 'success',
-                        timer: 3000,
-                        buttons: false,
-                    })
-     
+            const products = JSON.parse(localStorage.getItem("Product_Details")) ?? [];
+            products.push(newproduct);
+            localStorage.setItem("Product_Details", JSON.stringify(products));
+            swal({
+                title: 'Product Added',
+                text: 'Redirecting...',
+                icon: 'success',
+                timer: 3000,
+                buttons: false,
+            })
 
 
-                    display();
+
+            display();
         }
     });
     var frm = document.getElementsByName('myform')[0];
-   frm.reset();  // Reset all form data
-   return false; // Prevent page refresh
+    frm.reset();  // Reset all form data
+    return false; // Prevent page refresh
 }
 
 var inputBox = document.getElementById("product_price");
@@ -137,10 +137,38 @@ function editProduct(id) {
     document.getElementById("update_product_name").value = items[index].name;
     document.getElementById("update_product_price").value = items[index].price;
     document.getElementById("update_product_description").value = items[index].description;
-    const update_img = document.getElementById("update_product_img").files[0];
+    const update_img = document.getElementById("update_product_img");
     document.querySelector("#submit_btn2").onclick = function () {
+        if (update_img.value != "") {
+           
+            const update_product_img = document.getElementById("update_product_img").files[0];
 
-        if (update_img === 'undefined') {
+            let reader = new FileReader();
+            reader.readAsDataURL(update_product_img);
+            reader.addEventListener("load", () => {
+                var url = reader.result;
+                items[index].id = document.getElementById("update_product_id").value;
+                items[index].name = document.getElementById("update_product_name").value;
+                items[index].price = document.getElementById("update_product_price").value;
+                items[index].description = document.getElementById("update_product_description").value;
+                items[index].img = url;
+                localStorage.setItem("Product_Details", JSON.stringify(items));
+                display();
+            });
+
+
+
+
+            swal({
+                title: 'Product Updated',
+                text: 'Redirecting...',
+                icon: 'success',
+                timer: 3000,
+                buttons: false,
+            })
+        }
+        else if(update_img.value === ""){
+         
             items[index].id = document.getElementById("update_product_id").value;
             items[index].name = document.getElementById("update_product_name").value;
             items[index].price = document.getElementById("update_product_price").value;
@@ -159,43 +187,15 @@ function editProduct(id) {
                 .then(() => {
                     dispatch(redirect('/'));
                 })
-                localStorage.setItem("Product_Details", JSON.stringify(items));
-        }
-
-
-        else if(update_img != "undefined"){
-          
-            const update_product_img=document.getElementById("update_product_img").files[0];
-
-            let reader = new FileReader();
-            reader.readAsDataURL(update_product_img);
-            reader.addEventListener("load", () => {
-                var url = reader.result;
-                items[index].id = document.getElementById("update_product_id").value;
-                items[index].name = document.getElementById("update_product_name").value;
-                items[index].price = document.getElementById("update_product_price").value;
-                items[index].description = document.getElementById("update_product_description").value;
-                items[index].img = url; 
-                localStorage.setItem("Product_Details", JSON.stringify(items));
-                display();
-            });
-
-
-          
-     
-            swal({
-                title: 'Product Updated2',
-                text: 'Redirecting...',
-                icon: 'success',
-                timer: 3000,
-                buttons: false,
-            })
+            localStorage.setItem("Product_Details", JSON.stringify(items));
         }
         else{
-            console.log("error");
+            console.log("err");
         }
+
+
     }
-   
+
 }
 
 function removeProduct(id) {
@@ -253,16 +253,16 @@ document.getElementById("sort_name").onclick = function () {
 
 
 
-function searchProduct(searchKeyword){
+function searchProduct(searchKeyword) {
 
     let filteredProducts;
     var products = JSON.parse(localStorage["Product_Details"]);
-    if(searchKeyword===''){
+    if (searchKeyword === '') {
         filteredProducts = products;
-    }else{
+    } else {
         filteredProducts = products.filter((product) => Object.keys(product).some(key => product[key].toLowerCase().includes(searchKeyword.toLowerCase())));
     }
- 
+
     displayProducts(filteredProducts);
 }
 function displayProducts(product) {
