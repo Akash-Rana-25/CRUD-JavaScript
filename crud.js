@@ -1,7 +1,8 @@
 window.onload = display();
 function display() {
     let card = "";
-    const product = JSON.parse(localStorage.getItem("Product_Details"));
+    // const product = JSON.parse(localStorage.getItem("Product_Details"));
+    const product = JSON.parse(localStorage.getItem("Product_Details")) ?? [];
     product.forEach(newproducts => {
         card += ` <div class="col shadow-sm p-3 mb-5 bg-body rounded">
         <img src="${newproducts.img}"style="height: 10rem;  width: 12rem;" class="card-img-top" alt="${newproducts.name}"></img> 
@@ -49,8 +50,7 @@ function addData() {
     var filePath = fileInput.value;
 
     // Allowing file type
-    var allowedExtensions =
-        /(\.jpg|\.jpeg|\.png|\.gif|\.webp)$/i;
+    var allowedExtensions =   /(\.jpg|\.jpeg|\.png|\.gif|\.webp)$/i;
     if (product_id === '' || product_img === '' || product_name === '' || product_price === '' || product_description === '') {
         swal({
             title: 'Please fill all the filed !!',
@@ -93,8 +93,10 @@ function addData() {
 
                 }
 
-                var items = JSON.parse(localStorage.getItem("Product_Details"));
-                if (items === '') {
+                var items = JSON.parse(localStorage.getItem("Product_Details")) ;
+                console.log(items);
+
+                if (items === '' || items ===null) {
                     const products = JSON.parse(localStorage.getItem("Product_Details")) ?? [];
                     products.push(newproduct);
                     localStorage.setItem("Product_Details", JSON.stringify(products));
@@ -113,7 +115,8 @@ function addData() {
                         })
 
                     display();
-                } else {
+                }
+                else {
 
                     for (var i = 0; i < items.length; i++) {
                         if (items[i].id == product_id) {
@@ -235,7 +238,7 @@ function editProduct(id) {
 
                     if (items[index].id === '' || items[index].name === '' || items[index].price === '' || items[index].description === '') {
                         swal({
-                            title: 'Please fill all the filed 1 !!',
+                            title: 'Please fill all the filed  !!',
                             text: 'Redirecting...',
                             icon: 'error',
                             timer: 2000,
@@ -248,8 +251,8 @@ function editProduct(id) {
                     } else {
                         localStorage.setItem("Product_Details", JSON.stringify(items));
                     }
-                       
-                    
+
+
                     display();
                     var myModalEl = document.getElementById('editModal');
                     var modal = bootstrap.Modal.getInstance(myModalEl)
@@ -267,47 +270,47 @@ function editProduct(id) {
         }
 
         else if (update_img.value === "") {
-         
-                items[index].id = document.getElementById("update_product_id").value;
-                items[index].name = document.getElementById("update_product_name").value;
-                items[index].price = document.getElementById("update_product_price").value;
-                items[index].description = document.getElementById("update_product_description").value;
 
-                if (items[index].id === '' || items[index].name === '' || items[index].price === '' || items[index].description === '') {
-                    con
-                    swal({
-                        title: 'Please fill all the filed !!',
-                        text: 'Redirecting...',
-                        icon: 'error',
-                        timer: 2000,
-                        buttons: false,
-                    })
-                        .then(() => {
-                            dispatch(redirect('/'));
-                        })
-                } else {
+            items[index].id = document.getElementById("update_product_id").value;
+            items[index].name = document.getElementById("update_product_name").value;
+            items[index].price = document.getElementById("update_product_price").value;
+            items[index].description = document.getElementById("update_product_description").value;
 
-                    localStorage.setItem("Product_Details", JSON.stringify(items));
-                }
-                display();
-                var myModalEl = document.getElementById('editModal');
-                var modal = bootstrap.Modal.getInstance(myModalEl)
-                modal.hide();
+            if (items[index].id === '' || items[index].name === '' || items[index].price === '' || items[index].description === '') {
+                con
                 swal({
-                    title: 'Product Updated',
+                    title: 'Please fill all the filed !!',
                     text: 'Redirecting...',
-                    icon: 'success',
-                    timer: 3000,
+                    icon: 'error',
+                    timer: 2000,
                     buttons: false,
                 })
                     .then(() => {
                         dispatch(redirect('/'));
                     })
-                // document.getElementById('editModal').innerHTML = ''; 
-                localStorage.setItem("Product_Details", JSON.stringify(items));
+            } else {
 
+                localStorage.setItem("Product_Details", JSON.stringify(items));
             }
-        
+            display();
+            var myModalEl = document.getElementById('editModal');
+            var modal = bootstrap.Modal.getInstance(myModalEl)
+            modal.hide();
+            swal({
+                title: 'Product Updated',
+                text: 'Redirecting...',
+                icon: 'success',
+                timer: 3000,
+                buttons: false,
+            })
+                .then(() => {
+                    dispatch(redirect('/'));
+                })
+            // document.getElementById('editModal').innerHTML = ''; 
+            localStorage.setItem("Product_Details", JSON.stringify(items));
+
+        }
+
         else {
             console.log("err");
         }
