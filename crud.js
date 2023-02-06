@@ -177,6 +177,7 @@ inputBox.addEventListener("keydown", function (e) {
     }
 });
 function editProduct(id) {
+
     let index = '';
     var items = JSON.parse(localStorage["Product_Details"]);
     for (var i = 0; i < items.length; i++) {
@@ -186,12 +187,16 @@ function editProduct(id) {
         }
     }
     document.getElementById("update_product_id").value = items[index].id;
-    document.getElementById("update_product_name").value = items[index].name;
-    document.getElementById("update_product_price").value = items[index].price;
-    document.getElementById("update_product_description").value = items[index].description;
+    const update_product_name = document.getElementById("update_product_name").value = items[index].name;
+    const update_product_price = document.getElementById("update_product_price").value = items[index].price;
+    const update_product_description = document.getElementById("update_product_description").value = items[index].description;
     const update_img = document.getElementById("update_product_img");
     document.querySelector("#submit_btn2").onclick = function () {
+
+        // update_product_name === '' || update_product_price === '' || update_product_description === ''
         if (update_img.value != "") {
+
+
             var fileInput =
                 document.getElementById('update_product_img');
 
@@ -227,8 +232,24 @@ function editProduct(id) {
                     items[index].price = document.getElementById("update_product_price").value;
                     items[index].description = document.getElementById("update_product_description").value;
                     items[index].img = url;
-                    localStorage.setItem("Product_Details", JSON.stringify(items));
 
+                    if (items[index].id === '' || items[index].name === '' || items[index].price === '' || items[index].description === '') {
+                        swal({
+                            title: 'Please fill all the filed 1 !!',
+                            text: 'Redirecting...',
+                            icon: 'error',
+                            timer: 2000,
+                            buttons: false,
+                        })
+                            .then(() => {
+                                dispatch(redirect('/'));
+                            })
+
+                    } else {
+                        localStorage.setItem("Product_Details", JSON.stringify(items));
+                    }
+                       
+                    
                     display();
                     var myModalEl = document.getElementById('editModal');
                     var modal = bootstrap.Modal.getInstance(myModalEl)
@@ -244,33 +265,49 @@ function editProduct(id) {
                 })
             }
         }
+
         else if (update_img.value === "") {
+         
+                items[index].id = document.getElementById("update_product_id").value;
+                items[index].name = document.getElementById("update_product_name").value;
+                items[index].price = document.getElementById("update_product_price").value;
+                items[index].description = document.getElementById("update_product_description").value;
 
-            items[index].id = document.getElementById("update_product_id").value;
-            items[index].name = document.getElementById("update_product_name").value;
-            items[index].price = document.getElementById("update_product_price").value;
-            items[index].description = document.getElementById("update_product_description").value;
+                if (items[index].id === '' || items[index].name === '' || items[index].price === '' || items[index].description === '') {
+                    con
+                    swal({
+                        title: 'Please fill all the filed !!',
+                        text: 'Redirecting...',
+                        icon: 'error',
+                        timer: 2000,
+                        buttons: false,
+                    })
+                        .then(() => {
+                            dispatch(redirect('/'));
+                        })
+                } else {
 
-
-            localStorage.setItem("Product_Details", JSON.stringify(items));
-            display();
-            var myModalEl = document.getElementById('editModal');
-            var modal = bootstrap.Modal.getInstance(myModalEl)
-            modal.hide();
-            swal({
-                title: 'Product Updated',
-                text: 'Redirecting...',
-                icon: 'success',
-                timer: 3000,
-                buttons: false,
-            })
-                .then(() => {
-                    dispatch(redirect('/'));
+                    localStorage.setItem("Product_Details", JSON.stringify(items));
+                }
+                display();
+                var myModalEl = document.getElementById('editModal');
+                var modal = bootstrap.Modal.getInstance(myModalEl)
+                modal.hide();
+                swal({
+                    title: 'Product Updated',
+                    text: 'Redirecting...',
+                    icon: 'success',
+                    timer: 3000,
+                    buttons: false,
                 })
-            // document.getElementById('editModal').innerHTML = ''; 
-            localStorage.setItem("Product_Details", JSON.stringify(items));
+                    .then(() => {
+                        dispatch(redirect('/'));
+                    })
+                // document.getElementById('editModal').innerHTML = ''; 
+                localStorage.setItem("Product_Details", JSON.stringify(items));
 
-        }
+            }
+        
         else {
             console.log("err");
         }
