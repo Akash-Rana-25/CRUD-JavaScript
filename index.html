@@ -33,48 +33,48 @@
             </div>
             <div class="col">
                 <button type="button" class="btn btn-success mt-2 mb-2 float-end add_product" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
+                    data-bs-target="#addModal">
                     Add Product
                 </button>
             </div>
         </div>
 
         <!-- insert Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                        <h5 class="modal-title" id="addModalLabel">Add Product</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="javascript:void(0)" id="myform"name="myform">
                             <div class="form-group">
                                 <label for="product_id">Product Id</label>
-                                <input type="text" class="form-control" id="product_id" required="" aria-describedby=""
-                                    placeholder="Enter Product Id">
+                                <input type="text" class="form-control" id="product_id" required aria-describedby=""
+                                    placeholder="Enter Product Id" required>
 
                             </div>
                             <div class="form-group">
                                 <label for="product_name">Product Name</label>
-                                <input type="text" class="form-control" id="product_name" required=""
-                                    placeholder="Enter Name of the Product">
+                                <input type="text" class="form-control" id="product_name" 
+                                    placeholder="Enter Name of the Product" required>
                             </div>
                             <div class="form-group">
                                 <label for="product_price">Product Price</label>
-                                <input type="number" min="0" class="form-control" id="product_price" required=""
-                                    aria-describedby="" placeholder="Enter the Price">
+                                <input type="number" min="0" class="form-control" id="product_price" 
+                                    aria-describedby="" placeholder="Enter the Price"required>
 
                             </div>
                             <div class="form-group">
                                 <label for="product_img">Product image</label>
-                                <input type="file" class="form-control" id="product_img" required=""> 
+                                <input type="file" class="form-control" id="product_img" required> 
 
                             </div>
                             <div class="form-group">
                                 <label for="product_description">Product Description</label>
-                                <input type="text" class="form-control" id="product_description" required=""
-                                    placeholder="Enter product description">
+                                <input type="text" class="form-control" id="product_description" 
+                                    placeholder="Enter product description"required>
                             </div>
 
                     </div>
@@ -87,29 +87,29 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
+                        <h5 class="modal-title" id="addModalLabel">Update Product</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="javascript:void(0)">
                             <div class="form-group">
                                 <label for="update_product_id">Product Id</label>
-                                <input type="text" class="form-control" id="update_product_id" required=""
+                                <input type="text" class="form-control" id="update_product_id" required
                                     aria-describedby="" value="" placeholder="Enter Product Id" disabled>
 
                             </div>
                             <div class="form-group">
                                 <label for="update_product_name">Product Name</label>
-                                <input type="text" class="form-control" id="update_product_name" required="" value=""
+                                <input type="text" class="form-control" id="update_product_name" required value=""
                                     placeholder="Enter Name of the Product">
                             </div>
                             <div class="form-group">
                                 <label for="update_product_price">Product Price</label>
-                                <input type="number" min="0" class="form-control" id="update_product_price" required=""
+                                <input type="number" min="0" class="form-control" id="update_product_price" required
                                     value="" aria-describedby="" placeholder="Enter the Price">
 
                             </div>
@@ -120,7 +120,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="update_product_description">Product Description</label>
-                                <input type="text" class="form-control" id="update_product_description" required=""
+                                <input type="text" class="form-control" id="update_product_description" required
                                     value="" placeholder="Enter product description">
                             </div>
 
@@ -147,7 +147,7 @@
                         additional.</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     <button type="button" id="update_btn" class="btn btn-outline-success" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal1">
+                        data-bs-target="#addModal1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path
