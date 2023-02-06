@@ -160,6 +160,9 @@ function addData() {
 
         display();
     }
+    var frm = document.getElementsByName('myform')[0];
+    frm.reset();  // Reset all form data
+    return false; // Prevent page refresh
 }
 
 var inputBox = document.getElementById("product_price");
@@ -168,6 +171,7 @@ var invalidChars = [
     "-",
     "+",
     "e",
+    ".",
 ];
 
 inputBox.addEventListener("input", function () {
