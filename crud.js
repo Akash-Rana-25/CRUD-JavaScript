@@ -183,6 +183,37 @@ inputBox.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 });
+
+var inputBox1 = document.getElementById("product_name");
+
+var invalidChars = [
+
+    " ",
+];
+
+inputBox1.addEventListener("input", function () {
+    this.value = this.value.replace(" ", "");
+});
+var inputBox2 = document.getElementById("product_description");
+
+var invalidChars = [
+
+    " ",
+];
+
+inputBox2.addEventListener("input", function () {
+    this.value = this.value.replace(" ", "");
+});
+var inputBox3 = document.getElementById("product_id");
+
+var invalidChars = [
+
+    " ",
+];
+
+inputBox3.addEventListener("input", function () {
+    this.value = this.value.replace(" ", "");
+});
 function editProduct(id) {
 
     let index = '';
