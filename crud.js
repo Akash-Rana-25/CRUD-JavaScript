@@ -194,16 +194,16 @@ var invalidChars = [
 inputBox1.addEventListener("input", function () {
     this.value = this.value.replace(" ", "");
 });
-var inputBox2 = document.getElementById("product_description");
+// var inputBox2 = document.getElementById("product_description");
 
-var invalidChars = [
+// var invalidChars = [
 
-    " ",
-];
+//     " ",
+// ];
 
-inputBox2.addEventListener("input", function () {
-    this.value = this.value.replace(" ", "");
-});
+// inputBox2.addEventListener("input", function () {
+//     this.value = this.value.replace(" ", "");
+// });
 var inputBox3 = document.getElementById("product_id");
 
 var invalidChars = [
